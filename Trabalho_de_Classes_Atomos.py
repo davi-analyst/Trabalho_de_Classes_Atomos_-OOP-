@@ -1,7 +1,7 @@
 class Proton:
     def __init__(self, carga, massa):
-        self._carga = carga             # _carga representa a carga elétrica do próton
-        self._massa = massa             # _massa representa a massa do próton
+        self._carga = carga # _carga representa a carga elétrica do próton
+        self._massa = massa # _massa representa a massa do próton
 
     @property
     def carga(self):
@@ -21,8 +21,8 @@ class Proton:
 
 class Neutron:
     def __init__(self, carga, massa):
-        self._carga = carga              # _carga representa a carga do nêutron
-        self._massa = massa              # _massa representa a massa do nêutron
+        self._carga = carga # _carga representa a carga do nêutron
+        self._massa = massa # _massa representa a massa do nêutron
 
     @property
     def carga(self):
@@ -42,8 +42,8 @@ class Neutron:
 
 class Eletron:
     def __init__(self, carga, massa):
-        self._carga = carga              # _carga representa a carga elétrica do elétron
-        self._massa = massa              # _massa representa a massa do elétron
+        self._carga = carga # _carga representa a carga elétrica do elétron
+        self._massa = massa # _massa representa a massa do elétron
 
     @property
     def carga(self):
@@ -62,12 +62,15 @@ class Eletron:
         self._massa = massa
 
 class Atomo:
-    def __init__(self, nome, numero_atomico, proton, neutron, eletron):
-        self._nome = nome                       # _nome demonstra o nome do elemento químico
-        self._numero_atomico = numero_atomico   # _numero_atomico representa o número atômico do elemento químico
-        self._proton = proton                   # quantidade de protons
-        self._neutron = neutron                 # quantidade de neutrons
-        self._eletron = eletron                 # quantidade de elétrons
+    def __init__(self, nome, numero_atomico, num_protons, num_neutrons, num_eletrons, proton, neutron, eletron):
+        self._nome = nome # _nome demonstra o nome do elemento químico
+        self._numero_atomico = numero_atomico # _numero_atomico representa o número atômico do elemento químico
+        self._num_protons = num_protons   # quantidade de prótons
+        self._num_neutrons = num_neutrons # quantidade de nêutrons
+        self._num_eletrons = num_eletrons # quantidade de elétrons
+        self._proton = proton
+        self._neutron = neutron
+        self._eletron = eletron
 
     @property
     def nome(self):
@@ -76,6 +79,18 @@ class Atomo:
     @property
     def numero_atomico(self):
         return self._numero_atomico
+
+    @property
+    def num_protons(self):
+        return self._num_protons
+
+    @property
+    def num_neutrons(self):
+        return self._num_neutrons
+
+    @property
+    def num_eletrons(self):
+        return self._num_eletrons
 
     @property
     def proton(self):
@@ -97,51 +112,48 @@ class Atomo:
     def numero_atomico(self, numero_atomico):
         self._numero_atomico = numero_atomico
 
-    @proton.setter
-    def proton(self, proton):
-        self._proton = proton
+    @num_protons.setter
+    def num_protons(self, num_protons):
+        self._num_protons = num_protons
 
-    @neutron.setter
-    def neutron(self, neutron):
-        self._neutron = neutron
+    @num_neutrons.setter
+    def num_neutrons(self, num_neutrons):
+        self._num_neutrons = num_neutrons
 
-    @eletron.setter
-    def eletron(self, eletron):
-        self._eletron = eletron
+    @num_eletrons.setter
+    def num_eletrons(self, num_eletrons):
+        self._num_eletrons = num_eletrons
 
     def mostrar(self):
         print(f"----------------------------\nElemento: {self._nome}\n")
         print(f"Número Atômico: {self._numero_atomico}\n")
-        print("Próton:"f"  Carga: +{self._proton.carga}"f"  Massa: ~{self._proton.massa}")
-        print("Nêutron:"f"  Carga: {self._neutron.carga}"f"  Massa: ~{self._neutron.massa}")
-        print("Elétron:"f"  Carga: -{self._eletron.carga}"f"  Massa: ~{self._eletron.massa}")
-
+        print("Próton:"  f" Carga: +{self._proton.carga}"  f" Massa: ~{self._proton.massa} | Quantidade: {self._num_protons}")
+        print("Nêutron:" f" Carga: {self._neutron.carga}"  f" Massa: ~{self._neutron.massa} | Quantidade: {self._num_neutrons}")
+        print("Elétron:" f" Carga: -{self._eletron.carga}" f" Massa: ~{self._eletron.massa} | Quantidade: {self._num_eletrons}")
 
 # Programa principal
-proton = Proton(1, 1)
+proton  = Proton(1, 1)
 neutron = Neutron(0, 1)
-eletron = Eletron(1, 0)
-atomo = Atomo("Hidrogênio", 1, proton, neutron, eletron)
+eletron = Eletron(1, 0.00055) # massa do elétron é ~0,00055 u, não 0
 
+atomo = Atomo("Hidrogênio", 1, num_protons=1, num_neutrons=0, num_eletrons=1, proton=proton, neutron=neutron, eletron=eletron)
 atomo.mostrar()
+
 print()
 
-# Alterações via setters 
+# Alterações via setters
 # n= A−Z (A = massa e Z = número atômico) para descobrir o número de neutrons
 # https://www.todamateria.com.br/tabela-periodica/ tabela periódica para consulta e modificações
-
 atomo.nome = "Hélio"
 atomo.numero_atomico = 2
-proton.carga = 2
-neutron.massa = 2
-eletron.carga = 2
-
+atomo.num_protons  = 2
+atomo.num_neutrons = 2
+atomo.num_eletrons = 2
 atomo.mostrar()
 
 atomo.nome = "Lítio"
 atomo.numero_atomico = 3
-proton.carga = 3
-neutron.massa = 4
-eletron.carga = 3
-
+atomo.num_protons  = 3
+atomo.num_neutrons = 4
+atomo.num_eletrons = 3
 atomo.mostrar()
